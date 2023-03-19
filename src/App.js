@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [usuario, setUsuario] = React.useState();
+  const [senha, setSenha] = React.useState();
+  const [logado, setLogado] = React.useState();
+
+  function CheckLogin(){
+    if(usuario == "Erivelton" && senha == "123456"){
+      setLogado({
+        nome: "Erivelton"
+      });
+    }
+  }
+
+  function Deslogar(){
+    setLogado();
+  }
+
+  if(!logado){
+    return (
+      <div>
+        Usuario: <input type="text" onChange={(e) => setUsuario(e.target.value)} />
+        Senha: <input type="password" onChange={(e) => setSenha(e.target.value)} />
+        <button onClick={CheckLogin}>Login</button>
+      </div>
+    );
+  }else{
+    return (
+      <>
+        <h1>{logado.nome}</h1>
+        <button onClick={Deslogar}>Deslogar</button>
+      </>)
+  }
+
+
+  
 }
 
 export default App;
